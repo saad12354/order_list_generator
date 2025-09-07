@@ -306,80 +306,80 @@ const InventoryManagement = () => {
           id: 'pf-1-4',
           name: '1/4" Pipe Fittings',
           fields: [
-            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'elbow', label: 'Elbow' }, { value: 'coupling', label: 'Coupling' }], defaultValue: 'elbow' },
-            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+            { key: 'elbowQuantity', type: 'number', label: 'Elbow Quantity', placeholder: '0', min: 0 },
+            { key: 'couplingQuantity', type: 'number', label: 'Coupling Quantity', placeholder: '0', min: 0 }
           ]
         },
         {
           id: 'pf-3-8',
           name: '3/8" Pipe Fittings',
           fields: [
-            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'elbow', label: 'Elbow' }, { value: 'coupling', label: 'Coupling' }], defaultValue: 'elbow' },
-            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+            { key: 'elbowQuantity', type: 'number', label: 'Elbow Quantity', placeholder: '0', min: 0 },
+            { key: 'couplingQuantity', type: 'number', label: 'Coupling Quantity', placeholder: '0', min: 0 }
           ]
         },
         {
           id: 'pf-1-2',
           name: '1/2" Pipe Fittings',
           fields: [
-            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'elbow', label: 'Elbow' }, { value: 'coupling', label: 'Coupling' }], defaultValue: 'elbow' },
-            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+            { key: 'elbowQuantity', type: 'number', label: 'Elbow Quantity', placeholder: '0', min: 0 },
+            { key: 'couplingQuantity', type: 'number', label: 'Coupling Quantity', placeholder: '0', min: 0 }
           ]
         },
         {
           id: 'pf-5-8',
           name: '5/8" Pipe Fittings',
           fields: [
-            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'elbow', label: 'Elbow' }, { value: 'coupling', label: 'Coupling' }], defaultValue: 'elbow' },
-            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+            { key: 'elbowQuantity', type: 'number', label: 'Elbow Quantity', placeholder: '0', min: 0 },
+            { key: 'couplingQuantity', type: 'number', label: 'Coupling Quantity', placeholder: '0', min: 0 }
           ]
         },
         {
           id: 'pf-3-4',
           name: '3/4" Pipe Fittings',
           fields: [
-            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'elbow', label: 'Elbow' }, { value: 'coupling', label: 'Coupling' }], defaultValue: 'elbow' },
-            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+            { key: 'elbowQuantity', type: 'number', label: 'Elbow Quantity', placeholder: '0', min: 0 },
+            { key: 'couplingQuantity', type: 'number', label: 'Coupling Quantity', placeholder: '0', min: 0 }
           ]
         },
         {
           id: 'pf-7-8',
           name: '7/8" Pipe Fittings',
           fields: [
-            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'elbow', label: 'Elbow' }, { value: 'coupling', label: 'Coupling' }], defaultValue: 'elbow' },
-            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+            { key: 'elbowQuantity', type: 'number', label: 'Elbow Quantity', placeholder: '0', min: 0 },
+            { key: 'couplingQuantity', type: 'number', label: 'Coupling Quantity', placeholder: '0', min: 0 }
           ]
         },
         {
           id: 'pf-1',
           name: '1" Pipe Fittings',
           fields: [
-            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'elbow', label: 'Elbow' }, { value: 'coupling', label: 'Coupling' }], defaultValue: 'elbow' },
-            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+            { key: 'elbowQuantity', type: 'number', label: 'Elbow Quantity', placeholder: '0', min: 0 },
+            { key: 'couplingQuantity', type: 'number', label: 'Coupling Quantity', placeholder: '0', min: 0 }
           ]
         },
           {
             id: 'pf-1-1-8',
             name: '1 1/8" Pipe Fittings',
             fields: [
-              { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'elbow', label: 'Elbow' }, { value: 'coupling', label: 'Coupling' }], defaultValue: 'elbow' },
-              { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+              { key: 'elbowQuantity', type: 'number', label: 'Elbow Quantity', placeholder: '0', min: 0 },
+              { key: 'couplingQuantity', type: 'number', label: 'Coupling Quantity', placeholder: '0', min: 0 }
             ]
           },
           {
             id: 'pf-1-3-8',
             name: '1 3/8" Pipe Fittings',
             fields: [
-              { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'elbow', label: 'Elbow' }, { value: 'coupling', label: 'Coupling' }], defaultValue: 'elbow' },
-              { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+              { key: 'elbowQuantity', type: 'number', label: 'Elbow Quantity', placeholder: '0', min: 0 },
+              { key: 'couplingQuantity', type: 'number', label: 'Coupling Quantity', placeholder: '0', min: 0 }
             ]
           },
           {
             id: 'pf-1-5-8',
             name: '1 5/8" Pipe Fittings',
             fields: [
-              { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'elbow', label: 'Elbow' }, { value: 'coupling', label: 'Coupling' }], defaultValue: 'elbow' },
-              { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+              { key: 'elbowQuantity', type: 'number', label: 'Elbow Quantity', placeholder: '0', min: 0 },
+              { key: 'couplingQuantity', type: 'number', label: 'Coupling Quantity', placeholder: '0', min: 0 }
             ]
           },
           {
@@ -1070,47 +1070,18 @@ const InventoryManagement = () => {
 
   const calculateCategoryStats = (category) => {
     const itemCount = category?.items?.length;
-    let totalValue = 0;
-    
-    category?.items?.forEach(item => {
-      const itemData = inventoryData?.[item?.id] || {};
-      const quantity = itemData?.quantity || 0;
-      const length = itemData?.length || 0;
-      // Mock pricing calculation for order estimation
-      totalValue += (quantity * 5) + (length * 2);
-    });
-
-    return { itemCount, totalValue };
+    return { itemCount };
   };
 
   const calculateOverallStats = () => {
     let totalItems = 0;
-    let totalValue = 0;
-    let selectedItems = 0;
-    let categoriesWithItems = 0;
 
     inventoryCategories?.forEach(category => {
       const stats = calculateCategoryStats(category);
       totalItems += stats?.itemCount;
-      totalValue += stats?.totalValue;
-      
-      let categoryHasItems = false;
-      category?.items?.forEach(item => {
-        const itemData = inventoryData?.[item?.id] || {};
-        const quantity = itemData?.quantity || 0;
-        const length = itemData?.length || 0;
-        const required = itemData?.required || false;
-        
-        if (quantity > 0 || length > 0 || required) {
-          selectedItems++;
-          categoryHasItems = true;
-        }
-      });
-      
-      if (categoryHasItems) categoriesWithItems++;
     });
 
-    return { totalItems, totalValue, selectedItems, categoriesWithItems };
+    return { totalItems };
   };
 
   const filteredCategories = inventoryCategories?.filter(category => {
@@ -1166,14 +1137,18 @@ const InventoryManagement = () => {
         const itemData = inventoryData?.[item?.id] || {};
         const quantity = itemData?.quantity || 0;
         const length = itemData?.length || 0;
+        const elbowQuantity = itemData?.elbowQuantity || 0;
+        const couplingQuantity = itemData?.couplingQuantity || 0;
         const required = itemData?.required || false;
-        
-        if (quantity > 0 || length > 0 || required) {
+
+        if (quantity > 0 || length > 0 || elbowQuantity > 0 || couplingQuantity > 0 || required) {
           allItems?.push({
             category: `${categoryEmoji} ${category?.title}`,
             name: item?.name,
             quantity: quantity > 0 ? `${quantity}` : '',
             length: length > 0 ? `${length}` : '',
+            elbowQuantity: elbowQuantity > 0 ? `${elbowQuantity}` : '',
+            couplingQuantity: couplingQuantity > 0 ? `${couplingQuantity}` : '',
             type: itemData?.type || '',
             unit: itemData?.unit || '',
             cores: itemData?.cores || '',
@@ -1186,7 +1161,7 @@ const InventoryManagement = () => {
     });
 
     // Generate comprehensive emoji-formatted report
-    const reportHeader = `🏢 HVAC PROJECT ORDER LIST\n\n📅 Generated: ${currentDate}\n📊 Total Items: ${allItems?.length}\n📋 Categories: ${overallStats?.categoriesWithItems}\n\n`;
+    const reportHeader = `🏢 HVAC PROJECT ORDER LIST\n\n📅 Generated: ${currentDate}\n\n`;
     
     let reportBody = '📦 COMPLETE ORDER SUMMARY:\n';
     reportBody += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
@@ -1194,6 +1169,8 @@ const InventoryManagement = () => {
     allItems?.forEach((item, index) => {
       const quantityText = item?.quantity ? `Qty: ${item?.quantity}` : '';
       const lengthText = item?.length ? `Length: ${item?.length} ${item?.unit || 'ft'}` : '';
+      const elbowQuantityText = item?.elbowQuantity ? `Elbow Qty: ${item?.elbowQuantity}` : '';
+      const couplingQuantityText = item?.couplingQuantity ? `Coupling Qty: ${item?.couplingQuantity}` : '';
       const typeText = item?.type ? `Type: ${item?.type}` : '';
       const coresText = item?.cores ? `Cores: ${item?.cores}` : '';
       const thicknessText = item?.thickness ? `Thickness: ${item?.thickness}` : '';
@@ -1205,6 +1182,8 @@ const InventoryManagement = () => {
       
       if (quantityText) reportBody += `   🔢 ${quantityText}\n`;
       if (lengthText) reportBody += `   📏 ${lengthText}\n`;
+      if (elbowQuantityText) reportBody += `   🔧 ${elbowQuantityText}\n`;
+      if (couplingQuantityText) reportBody += `   🔗 ${couplingQuantityText}\n`;
       if (typeText) reportBody += `   ⚙️ ${typeText}\n`;
       if (coresText) reportBody += `   🔌 ${coresText}\n`;
       if (thicknessText) reportBody += `   📐 ${thicknessText}\n`;
@@ -1298,87 +1277,9 @@ const InventoryManagement = () => {
         {/* Main Content */}
         <div className="px-4 lg:px-6 py-6 pb-20 lg:pb-6">
           {/* Summary Cards - Updated for Order Management */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <StockSummaryCard
-              title="Total Items"
-              value={overallStats?.totalItems}
-              icon="Package"
-              color="primary"
-              change=""
-              changeType="neutral"
-            />
-            <StockSummaryCard
-              title="Est. Value"
-              value={`$${overallStats?.totalValue?.toFixed(0)}`}
-              change="+12%"
-              changeType="positive"
-              icon="DollarSign"
-              color="success"
-            />
-            <StockSummaryCard
-              title="Selected"
-              value={overallStats?.selectedItems}
-              change="+8"
-              changeType="positive"
-              icon="ShoppingCart"
-              color="warning"
-            />
-            <StockSummaryCard
-              title="Categories"
-              value={overallStats?.categoriesWithItems}
-              change="+2"
-              changeType="positive"
-              icon="Grid3x3"
-              color="primary"
-            />
-          </div>
+          {/* Inventory Summary removed as per user request */}
 
-          {/* Report Preview Section */}
-          {generatedReport && (
-            <div className="bg-card border border-border rounded-lg p-6 mb-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-3">
-                  <div className="flex items-center justify-center w-10 h-10 bg-success/10 rounded-lg">
-                    <Icon name="FileCheck" size={20} className="text-success" />
-                  </div>
-                  <div>
-                    <h2 className="text-lg font-semibold text-foreground">Order Report Generated</h2>
-                    <p className="text-sm text-muted-foreground">
-                      {generatedReport?.totalItems} items • Ready to copy or share
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex space-x-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    iconName="Copy"
-                    iconPosition="left"
-                    onClick={handleCopyReport}
-                  >
-                    Copy
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    iconName="Share"
-                    iconPosition="left"
-                    onClick={handleShareReport}
-                    className="bg-green-500 hover:bg-green-600 text-white border-green-500"
-                  >
-                    Share
-                  </Button>
-                </div>
-              </div>
-              
-              <div className="bg-background border border-border rounded-lg p-4 max-h-60 overflow-y-auto">
-                <pre className="text-sm whitespace-pre-wrap text-foreground font-mono">
-                  {generatedReport?.content}
-                </pre>
-              </div>
-            </div>
-          )}
+          {/* Report Preview Section removed as per user request */}
 
           {/* Search and Filter */}
           <SearchAndFilter
@@ -1402,7 +1303,6 @@ const InventoryManagement = () => {
                   title={`${getCategoryEmoji(category?.id)} ${category?.title}`}
                   icon={category?.icon}
                   itemCount={stats?.itemCount}
-                  totalValue={stats?.totalValue}
                   variant={category?.variant}
                   isExpanded={true} // Always expanded for order making
                   onToggle={() => {}} // Disabled toggle for order making view
