@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # React
 
 A modern React-based project utilizing the latest frontend technologies and tools for building responsive web applications.
@@ -94,14 +95,11 @@ The app is built with responsive design using Tailwind CSS breakpoints.
 
 Build the application for production:
 
-```bash
-npm run build
-```
 
-## 🙏 Acknowledgments
+#
 
-- Built with [Rocket.new](https://rocket.new)
-- Powered by React and Vite
-- Styled with Tailwind CSS
+Buil
+=======
+# order_list_generator
+>>>>>>> 0a4f633aeec21bb4f4dc43a95c48255b18626d04
 
-Built with ❤️ on Rocket.new

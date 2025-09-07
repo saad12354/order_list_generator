@@ -127,6 +127,20 @@ const InventoryManagement = () => {
       variant: 'success',
       items: [
         {
+          id: 'ins-1-8',
+          name: '1/8" Insulation',
+          fields: [
+            { key: 'length', type: 'number', label: 'Length', placeholder: '0', min: 0, step: 0.1 },
+            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }], defaultValue: 'ft' },
+            { key: 'thickness', type: 'select', label: 'Thickness', options: [
+              { value: '9mm', label: '9mm' },
+              { value: '13mm', label: '13mm' },
+              { value: '19mm', label: '19mm' },
+              { value: '25mm', label: '25mm' }
+            ], defaultValue: '9mm' }
+          ]
+        },
+        {
           id: 'ins-1-4',
           name: '1/4" Insulation',
           fields: [
@@ -344,14 +358,58 @@ const InventoryManagement = () => {
             { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
           ]
         },
-        {
-          id: 'pf-1-1-8',
-          name: '1 1/8" Pipe Fittings',
-          fields: [
-            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'elbow', label: 'Elbow' }, { value: 'coupling', label: 'Coupling' }], defaultValue: 'elbow' },
-            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
-          ]
-        }
+          {
+            id: 'pf-1-1-8',
+            name: '1 1/8" Pipe Fittings',
+            fields: [
+              { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'elbow', label: 'Elbow' }, { value: 'coupling', label: 'Coupling' }], defaultValue: 'elbow' },
+              { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+            ]
+          },
+          {
+            id: 'pf-1-3-8',
+            name: '1 3/8" Pipe Fittings',
+            fields: [
+              { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'elbow', label: 'Elbow' }, { value: 'coupling', label: 'Coupling' }], defaultValue: 'elbow' },
+              { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+            ]
+          },
+          {
+            id: 'pf-1-5-8',
+            name: '1 5/8" Pipe Fittings',
+            fields: [
+              { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'elbow', label: 'Elbow' }, { value: 'coupling', label: 'Coupling' }], defaultValue: 'elbow' },
+              { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+            ]
+          },
+          {
+            id: 'pf-cpvc',
+            name: 'CPVC',
+            fields: [
+              { key: 'quantity', type: 'number', label: 'Quantity (feet)', placeholder: '0', min: 0, step: 0.1 }
+            ]
+          },
+          {
+            id: 'pf-upvc',
+            name: 'UPVC',
+            fields: [
+              { key: 'quantity', type: 'number', label: 'Quantity (feet)', placeholder: '0', min: 0, step: 0.1 }
+            ]
+          },
+          {
+            id: 'pf-pvc',
+            name: 'PVC',
+            fields: [
+              { key: 'quantity', type: 'number', label: 'Quantity (feet)', placeholder: '0', min: 0, step: 0.1 }
+            ]
+          },
+          {
+            id: 'pf-solvent',
+            name: 'Solvent',
+            fields: [
+              { key: 'quantity', type: 'number', label: 'Quantity (ml)', placeholder: '0', min: 0 }
+            ]
+          }
       ]
     },
     {
@@ -402,86 +460,98 @@ const InventoryManagement = () => {
         }
       ]
     },
-    {
-      id: 'wire',
-      title: 'Wire',
-      icon: 'Zap',
-      variant: 'primary',
-      items: [
-        {
-          id: 'wire-0-5',
-          name: '0.5 sq mm Wire',
-          fields: [
-            { key: 'length', type: 'number', label: 'Length (m)', placeholder: '0', min: 0, step: 0.1 },
-            { key: 'cores', type: 'toggle', label: 'Cores', options: [
-              { value: '2', label: '2 Core' },
-              { value: '4', label: '4 Core' },
-              { value: '6', label: '6 Core' }
-            ], defaultValue: '2' }
-          ]
-        },
-        {
-          id: 'wire-0-75',
-          name: '0.75 sq mm Wire',
-          fields: [
-            { key: 'length', type: 'number', label: 'Length (m)', placeholder: '0', min: 0, step: 0.1 },
-            { key: 'cores', type: 'toggle', label: 'Cores', options: [
-              { value: '2', label: '2 Core' },
-              { value: '4', label: '4 Core' },
-              { value: '6', label: '6 Core' }
-            ], defaultValue: '2' }
-          ]
-        },
-        {
-          id: 'wire-1-0',
-          name: '1.0 sq mm Wire',
-          fields: [
-            { key: 'length', type: 'number', label: 'Length (m)', placeholder: '0', min: 0, step: 0.1 },
-            { key: 'cores', type: 'toggle', label: 'Cores', options: [
-              { value: '2', label: '2 Core' },
-              { value: '4', label: '4 Core' },
-              { value: '6', label: '6 Core' }
-            ], defaultValue: '2' }
-          ]
-        },
-        {
-          id: 'wire-1-5',
-          name: '1.5 sq mm Wire',
-          fields: [
-            { key: 'length', type: 'number', label: 'Length (m)', placeholder: '0', min: 0, step: 0.1 },
-            { key: 'cores', type: 'toggle', label: 'Cores', options: [
-              { value: '2', label: '2 Core' },
-              { value: '4', label: '4 Core' },
-              { value: '6', label: '6 Core' }
-            ], defaultValue: '2' }
-          ]
-        },
-        {
-          id: 'wire-2-5',
-          name: '2.5 sq mm Wire',
-          fields: [
-            { key: 'length', type: 'number', label: 'Length (m)', placeholder: '0', min: 0, step: 0.1 },
-            { key: 'cores', type: 'toggle', label: 'Cores', options: [
-              { value: '2', label: '2 Core' },
-              { value: '4', label: '4 Core' },
-              { value: '6', label: '6 Core' }
-            ], defaultValue: '2' }
-          ]
-        },
-        {
-          id: 'wire-4-0',
-          name: '4.0 sq mm Wire',
-          fields: [
-            { key: 'length', type: 'number', label: 'Length (m)', placeholder: '0', min: 0, step: 0.1 },
-            { key: 'cores', type: 'toggle', label: 'Cores', options: [
-              { value: '2', label: '2 Core' },
-              { value: '4', label: '4 Core' },
-              { value: '6', label: '6 Core' }
-            ], defaultValue: '2' }
-          ]
-        }
-      ]
-    },
+      {
+        id: 'wire',
+        title: 'Wire',
+        icon: 'Zap',
+        variant: 'primary',
+        items: [
+          {
+            id: 'wire-0-5',
+            name: '0.5 sq mm Wire',
+            fields: [
+              { key: 'length', type: 'number', label: 'Length (m)', placeholder: '0', min: 0, step: 0.1 },
+              { key: 'cores', type: 'toggle', label: 'Cores', options: [
+                { value: '2', label: '2 Core' },
+                { value: '4', label: '4 Core' },
+                { value: '6', label: '6 Core' }
+              ], defaultValue: '2' }
+            ]
+          },
+          {
+            id: 'wire-0-75',
+            name: '0.75 sq mm Wire',
+            fields: [
+              { key: 'length', type: 'number', label: 'Length (m)', placeholder: '0', min: 0, step: 0.1 },
+              { key: 'cores', type: 'toggle', label: 'Cores', options: [
+                { value: '2', label: '2 Core' },
+                { value: '4', label: '4 Core' },
+                { value: '6', label: '6 Core' }
+              ], defaultValue: '2' }
+            ]
+          },
+          {
+            id: 'wire-1-0',
+            name: '1.0 sq mm Wire',
+            fields: [
+              { key: 'length', type: 'number', label: 'Length (m)', placeholder: '0', min: 0, step: 0.1 },
+              { key: 'cores', type: 'toggle', label: 'Cores', options: [
+                { value: '2', label: '2 Core' },
+                { value: '4', label: '4 Core' },
+                { value: '6', label: '6 Core' }
+              ], defaultValue: '2' }
+            ]
+          },
+          {
+            id: 'wire-1-5',
+            name: '1.5 sq mm Wire',
+            fields: [
+              { key: 'length', type: 'number', label: 'Length (m)', placeholder: '0', min: 0, step: 0.1 },
+              { key: 'cores', type: 'toggle', label: 'Cores', options: [
+                { value: '2', label: '2 Core' },
+                { value: '4', label: '4 Core' },
+                { value: '6', label: '6 Core' }
+              ], defaultValue: '2' }
+            ]
+          },
+          {
+            id: 'wire-2-5',
+            name: '2.5 sq mm Wire',
+            fields: [
+              { key: 'length', type: 'number', label: 'Length (m)', placeholder: '0', min: 0, step: 0.1 },
+              { key: 'cores', type: 'toggle', label: 'Cores', options: [
+                { value: '2', label: '2 Core' },
+                { value: '4', label: '4 Core' },
+                { value: '6', label: '6 Core' }
+              ], defaultValue: '2' }
+            ]
+          },
+          {
+            id: 'wire-4-0',
+            name: '4.0 sq mm Wire',
+            fields: [
+              { key: 'length', type: 'number', label: 'Length (m)', placeholder: '0', min: 0, step: 0.1 },
+              { key: 'cores', type: 'toggle', label: 'Cores', options: [
+                { value: '2', label: '2 Core' },
+                { value: '4', label: '4 Core' },
+                { value: '6', label: '6 Core' }
+              ], defaultValue: '2' }
+            ]
+          },
+          {
+            id: 'wire-6-0',
+            name: '6.0 sq mm Wire',
+            fields: [
+              { key: 'length', type: 'number', label: 'Length (m)', placeholder: '0', min: 0, step: 0.1 },
+              { key: 'cores', type: 'toggle', label: 'Cores', options: [
+                { value: '2', label: '2 Core' },
+                { value: '4', label: '4 Core' },
+                { value: '6', label: '6 Core' }
+              ], defaultValue: '2' }
+            ]
+          }
+        ]
+      },
     {
       id: 'tools',
       title: 'Tools',
@@ -540,6 +610,206 @@ const InventoryManagement = () => {
             { key: 'required', type: 'checkbox', label: 'Required for project' },
             { key: 'manual', type: 'checkbox', label: 'Manual Bender' },
             { key: 'hydraulic', type: 'checkbox', label: 'Hydraulic Bender' }
+          ]
+        },
+        {
+          id: 'tool-drain-heater',
+          name: 'Drain Heater',
+          fields: [
+            { key: 'length', type: 'number', label: 'Length (ft)', placeholder: '0', min: 0, step: 0.1 }
+          ]
+        },
+        {
+          id: 'tool-monsoon-tape',
+          name: 'Monsoon Tape',
+          fields: [
+            { key: 'length', type: 'number', label: 'Length', placeholder: '0', min: 0, step: 0.1 },
+            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+          ]
+        },
+        {
+          id: 'tool-teflon-tape',
+          name: 'Teflon Tape',
+          fields: [
+            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+          ]
+        },
+        {
+          id: 'tool-tarfelt',
+          name: 'Tarfelt',
+          fields: [
+            { key: 'length', type: 'number', label: 'Length', placeholder: '0', min: 0, step: 0.1 },
+            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'meter', label: 'Meter' }, { value: 'roll', label: 'Roll' }], defaultValue: 'meter' },
+            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+          ]
+        },
+        {
+          id: 'tool-liquid-puff',
+          name: 'Liquid Puff',
+          fields: [
+            { key: 'quantity', type: 'number', label: 'Quantity (L)', placeholder: '0', min: 0, step: 0.1 }
+          ]
+        },
+        {
+          id: 'tool-hatlon',
+          name: 'Hatlon',
+          fields: [
+            { key: 'length', type: 'number', label: 'Length', placeholder: '0', min: 0, step: 0.1 },
+            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }], defaultValue: 'ft' }
+          ]
+        },
+        {
+          id: 'tool-threaded-rod',
+          name: 'Threaded Rod',
+          fields: [
+            { key: 'size', type: 'select', label: 'Size', options: [
+              { value: '8mm', label: '8mm' },
+              { value: '10mm', label: '10mm' },
+              { value: '12mm', label: '12mm' }
+            ], defaultValue: '10mm' },
+            { key: 'length', type: 'number', label: 'Length (m)', placeholder: '0', min: 0, step: 0.1 },
+            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+          ]
+        },
+        {
+          id: 'tool-nut-washer',
+          name: 'Nut & Washer',
+          fields: [
+            { key: 'size', type: 'select', label: 'Size', options: [
+              { value: '8mm', label: '8mm' },
+              { value: '10mm', label: '10mm' },
+              { value: '12mm', label: '12mm' }
+            ], defaultValue: '10mm' },
+            { key: 'length', type: 'radio', label: 'Length', options: [
+              { value: '3', label: '3 inch' },
+              { value: '4', label: '4 inch' },
+              { value: '5', label: '5 inch' },
+              { value: '6', label: '6 inch' }
+            ], defaultValue: '4' },
+            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+          ]
+        },
+        {
+          id: 'tool-nut-bolt',
+          name: 'Nut Bolt',
+          fields: [
+            { key: 'size', type: 'select', label: 'Size', options: [
+              { value: '8mm', label: '8mm' },
+              { value: '10mm', label: '10mm' },
+              { value: '12mm', label: '12mm' }
+            ], defaultValue: '10mm' },
+            { key: 'length', type: 'select', label: 'Length', options: [
+              { value: '3', label: '3 inch' },
+              { value: '4', label: '4 inch' },
+              { value: '5', label: '5 inch' },
+              { value: '6', label: '6 inch' }
+            ], defaultValue: '4' },
+            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+          ]
+        },
+        {
+          id: 'tool-drill-bit-set',
+          name: 'Drill Bit Set',
+          fields: [
+            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 },
+            { key: 'sizes', type: 'text', label: 'Sizes', placeholder: '8mm,10mm,12mm' }
+          ]
+        },
+        {
+          id: 'tool-silicone',
+          name: 'Silicone',
+          fields: [
+            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 },
+            { key: 'color', type: 'radio', label: 'Color', options: [
+              { value: 'white', label: 'White' },
+              { value: 'clear', label: 'Clear' },
+              { value: 'gray', label: 'Gray' }
+            ], defaultValue: 'clear' },
+            { key: 'gun_required', type: 'checkbox', label: 'Gun Required' }
+          ]
+        },
+        {
+          id: 'tool-fastener',
+          name: 'Fastener',
+          fields: [
+            { key: 'size', type: 'select', label: 'Size', options: [
+              { value: '8mm', label: '8mm' },
+              { value: '10mm', label: '10mm' },
+              { value: '12mm', label: '12mm' }
+            ], defaultValue: '10mm' },
+            { key: 'length', type: 'checkboxes', label: 'Length', options: [
+              { value: '3', label: '3 inch' },
+              { value: '4', label: '4 inch' },
+              { value: '5', label: '5 inch' },
+              { value: '6', label: '6 inch' }
+            ] },
+            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+          ]
+        },
+        {
+          id: 'tool-spring-bender',
+          name: 'Spring Bender',
+          fields: [
+            { key: 'size', type: 'select', label: 'Size', options: [
+              { value: 'small', label: 'Small' },
+              { value: 'medium', label: 'Medium' },
+              { value: 'large', label: 'Large' }
+            ], defaultValue: 'medium' },
+            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+          ]
+        },
+        {
+          id: 'tool-gas-batti-set',
+          name: 'Gas Batti Set',
+          fields: [
+            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+          ]
+        },
+        {
+          id: 'tool-sensor-wire',
+          name: 'Sensor Wire',
+          fields: [
+            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 },
+            { key: 'length', type: 'number', label: 'Length (m)', placeholder: '0', min: 0, step: 0.1 }
+          ]
+        },
+        {
+          id: 'tool-vacuum-pump',
+          name: 'Vacuum Pump',
+          fields: [
+            { key: 'required', type: 'checkbox', label: 'Required for project' }
+          ]
+        },
+        {
+          id: 'tool-drain-selection-t',
+          name: 'Drain Selection T',
+          fields: [
+            { key: 'required', type: 'checkbox', label: 'Required for project' }
+          ]
+        },
+        {
+          id: 'tool-led-light',
+          name: 'LED Light',
+          fields: [
+            { key: 'size', type: 'toggle', label: 'Size', options: [
+              { value: '2ft', label: '2ft' },
+              { value: '4ft', label: '4ft' }
+            ], defaultValue: '4ft' },
+            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+          ]
+        },
+        {
+          id: 'tool-controller',
+          name: 'Controller',
+          fields: [
+            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+          ]
+        },
+        {
+          id: 'tool-controller-box',
+          name: 'Controller Box',
+          fields: [
+            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
           ]
         }
       ]
@@ -678,6 +948,63 @@ const InventoryManagement = () => {
               { value: '3/4', label: '3/4"' },
               { value: '1', label: '1"' }
             ], defaultValue: '1/2' }
+          ]
+        },
+        {
+          id: 'elec-switch-box',
+          name: 'Switch Box',
+          fields: [
+            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+          ]
+        },
+        {
+          id: 'elec-hooter',
+          name: 'Hooter',
+          fields: [
+            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+          ]
+        },
+        {
+          id: 'elec-weather-switch',
+          name: 'Weather Switch',
+          fields: [
+            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+          ]
+        },
+        {
+          id: 'elec-bell-switch',
+          name: 'Bell Switch',
+          fields: [
+            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'basic-items',
+      title: 'Basic Items',
+      icon: 'Package',
+      variant: 'default',
+      items: [
+        {
+          id: 'bi-expansion-wall',
+          name: 'Expansion Wall',
+          fields: [
+            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+          ]
+        },
+        {
+          id: 'bi-asbestos-rope',
+          name: 'Asbestos Rope',
+          fields: [
+            { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
+          ]
+        },
+        {
+          id: 'bi-heater',
+          name: 'Heater',
+          fields: [
+            { key: 'length', type: 'number', label: 'Length (ft)', placeholder: '0', min: 0, step: 0.1 }
           ]
         }
       ]
