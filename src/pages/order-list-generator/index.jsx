@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BottomTabNavigation from '../../components/ui/BottomTabNavigation';
 
@@ -9,11 +9,12 @@ import QuickActionBar from './components/QuickActionBar';
 import SearchAndFilter from './components/SearchAndFilter';
 import Button from '../../components/ui/Button';
 import Icon from '../../components/AppIcon';
+import { useInventory } from '../../hooks/useInventory';
 
 const InventoryManagement = () => {
   const navigate = useNavigate();
+  const { inventoryData, loading: inventoryLoading, updateInventoryData } = useInventory(inventoryCategories);
   const [expandedCategories, setExpandedCategories] = useState({});
-  const [inventoryData, setInventoryData] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('name-asc');
@@ -1020,33 +1021,6 @@ const InventoryManagement = () => {
     setExpandedCategories(initialExpanded);
   }, []);
 
-  // Initialize inventory data
-  useEffect(() => {
-    const savedData = localStorage.getItem('hvac-order-data');
-    if (savedData) {
-      setInventoryData(JSON.parse(savedData));
-    } else {
-      // Initialize with empty data structure
-      const initialData = {};
-      inventoryCategories?.forEach(category => {
-        category?.items?.forEach(item => {
-          initialData[item.id] = {};
-          item?.fields?.forEach(field => {
-            initialData[item.id][field.key] = field?.defaultValue || '';
-          });
-        });
-      });
-      setInventoryData(initialData);
-    }
-  }, []);
-
-  // Save data to localStorage whenever inventoryData changes
-  useEffect(() => {
-    if (Object.keys(inventoryData)?.length > 0) {
-      localStorage.setItem('hvac-order-data', JSON.stringify(inventoryData));
-    }
-  }, [inventoryData]);
-
   const toggleCategory = useCallback((categoryId) => {
     setExpandedCategories(prev => ({
       ...prev,
@@ -1055,18 +1029,18 @@ const InventoryManagement = () => {
   }, []);
 
   const handleInventoryChange = useCallback((itemId, newData) => {
-    setInventoryData(prev => ({
-      ...prev,
+    updateInventoryData({
+      ...inventoryData,
       [itemId]: newData
-    }));
-  }, []);
+    });
+  }, [inventoryData, updateInventoryData]);
 
   const handleInventoryUpdate = useCallback((itemId, data) => {
-    setInventoryData(prev => ({
-      ...prev,
+    updateInventoryData({
+      ...inventoryData,
       [itemId]: data
-    }));
-  }, []);
+    });
+  }, [inventoryData, updateInventoryData]);
 
   const calculateCategoryStats = (category) => {
     const itemCount = category?.items?.length;
@@ -1276,60 +1250,71 @@ const InventoryManagement = () => {
 
         {/* Main Content */}
         <div className="px-4 lg:px-6 py-6 pb-20 lg:pb-6">
-          {/* Summary Cards - Updated for Order Management */}
-          {/* Inventory Summary removed as per user request */}
+          {inventoryLoading ? (
+            <div className="flex items-center justify-center py-12">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+                <p className="text-muted-foreground">Loading inventory data...</p>
+              </div>
+            </div>
+          ) : (
+            <>
+              {/* Summary Cards - Updated for Order Management */}
+              {/* Inventory Summary removed as per user request */}
 
-          {/* Report Preview Section removed as per user request */}
+              {/* Report Preview Section removed as per user request */}
 
-          {/* Search and Filter */}
-          <SearchAndFilter
-            searchQuery={searchQuery}
-            onSearchChange={setSearchQuery}
-            selectedCategory={selectedCategory}
-            onCategoryChange={setSelectedCategory}
-            sortBy={sortBy}
-            onSortChange={setSortBy}
-            onClearFilters={handleClearFilters}
-            className="mb-6"
-          />
+              {/* Search and Filter */}
+              <SearchAndFilter
+                searchQuery={searchQuery}
+                onSearchChange={setSearchQuery}
+                selectedCategory={selectedCategory}
+                onCategoryChange={setSelectedCategory}
+                sortBy={sortBy}
+                onSortChange={setSortBy}
+                onClearFilters={handleClearFilters}
+                className="mb-6"
+              />
 
-          {/* All Items Display - Always Expanded for Order Making */}
-          <div className="space-y-4">
-            {filteredCategories?.map((category) => {
-              const stats = calculateCategoryStats(category);
-              return (
-                <CategoryCard
-                  key={category?.id}
-                  title={`${getCategoryEmoji(category?.id)} ${category?.title}`}
-                  icon={category?.icon}
-                  itemCount={stats?.itemCount}
-                  variant={category?.variant}
-                  isExpanded={true} // Always expanded for order making
-                  onToggle={() => {}} // Disabled toggle for order making view
-                >
-                  <div className="space-y-6">
-                    {category?.items?.filter(item => 
-                        searchQuery === '' || 
-                        item?.name?.toLowerCase()?.includes(searchQuery?.toLowerCase())
-                      )?.map((item) => (
-                        <div key={item?.id} className="bg-background rounded-lg border border-border p-4 hover:border-primary/20 transition-colors">
-                          <h4 className="font-medium text-foreground mb-4 flex items-center gap-2">
-                            <Icon name="Package" size={16} className="text-muted-foreground" />
-                            {item?.name}
-                          </h4>
-                          <InventoryItemForm
-                            item={item}
-                            value={inventoryData?.[item?.id] || {}}
-                            onChange={handleInventoryChange}
-                            onUpdate={handleInventoryUpdate}
-                          />
-                        </div>
-                      ))}
-                  </div>
-                </CategoryCard>
-              );
-            })}
-          </div>
+              {/* All Items Display - Always Expanded for Order Making */}
+              <div className="space-y-4">
+                {filteredCategories?.map((category) => {
+                  const stats = calculateCategoryStats(category);
+                  return (
+                    <CategoryCard
+                      key={category?.id}
+                      title={`${getCategoryEmoji(category?.id)} ${category?.title}`}
+                      icon={category?.icon}
+                      itemCount={stats?.itemCount}
+                      variant={category?.variant}
+                      isExpanded={true} // Always expanded for order making
+                      onToggle={() => {}} // Disabled toggle for order making view
+                    >
+                      <div className="space-y-6">
+                        {category?.items?.filter(item =>
+                            searchQuery === '' ||
+                            item?.name?.toLowerCase()?.includes(searchQuery?.toLowerCase())
+                          )?.map((item) => (
+                            <div key={item?.id} className="bg-background rounded-lg border border-border p-4 hover:border-primary/20 transition-colors">
+                              <h4 className="font-medium text-foreground mb-4 flex items-center gap-2">
+                                <Icon name="Package" size={16} className="text-muted-foreground" />
+                                {item?.name}
+                              </h4>
+                              <InventoryItemForm
+                                item={item}
+                                value={inventoryData?.[item?.id] || {}}
+                                onChange={handleInventoryChange}
+                                onUpdate={handleInventoryUpdate}
+                              />
+                            </div>
+                          ))}
+                      </div>
+                    </CategoryCard>
+                  );
+                })}
+              </div>
+            </>
+          )}
         </div>
       </div>
       
