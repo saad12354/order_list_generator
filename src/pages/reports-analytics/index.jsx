@@ -144,8 +144,6 @@ const ReportsAnalytics = () => {
                   onShare={handleShareReport}
                 />
                 
-                <InventorySummaryCard inventoryData={appliedFilters} />
-                
                 <AnalyticsCharts />
               </div>
             </div>

@@ -110,7 +110,7 @@ const InventoryItemForm = ({
       </div>
       <div className="flex justify-end pt-4 border-t border-border">
         <Button type="submit" variant="default" size="sm">
-          Update Stock
+          Add
         </Button>
       </div>
     </form>

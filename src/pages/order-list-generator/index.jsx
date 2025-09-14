@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BottomTabNavigation from '../../components/ui/BottomTabNavigation';
 
@@ -9,17 +9,12 @@ import QuickActionBar from './components/QuickActionBar';
 import SearchAndFilter from './components/SearchAndFilter';
 import Button from '../../components/ui/Button';
 import Icon from '../../components/AppIcon';
+
 import { useInventory } from '../../hooks/useInventory';
 
 const InventoryManagement = () => {
   const navigate = useNavigate();
-  const { inventoryData, loading: inventoryLoading, updateInventoryData } = useInventory(inventoryCategories);
   const [expandedCategories, setExpandedCategories] = useState({});
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [sortBy, setSortBy] = useState('name-asc');
-  const [showAllItems, setShowAllItems] = useState(true); // Show all items by default for order making
-  const [generatedReport, setGeneratedReport] = useState(null);
 
   // Comprehensive order list categories with all required items
   const inventoryCategories = [
@@ -33,7 +28,7 @@ const InventoryManagement = () => {
           id: 'cp-1-4',
           name: '1/4" Copper Pipe',
           fields: [
-            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'soft', label: 'Soft' }, { value: 'hard', label: 'Hard' }], defaultValue: 'soft' },
+            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'soft', label: 'Soft' }, { value: 'hard', label: 'Hard' }] },
             { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 },
             { key: 'length', type: 'number', label: 'Length (ft)', placeholder: '0', min: 0, step: 0.1 }
           ]
@@ -42,7 +37,7 @@ const InventoryManagement = () => {
           id: 'cp-3-8',
           name: '3/8" Copper Pipe',
           fields: [
-            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'soft', label: 'Soft' }, { value: 'hard', label: 'Hard' }], defaultValue: 'soft' },
+            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'soft', label: 'Soft' }, { value: 'hard', label: 'Hard' }] },
             { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 },
             { key: 'length', type: 'number', label: 'Length (ft)', placeholder: '0', min: 0, step: 0.1 }
           ]
@@ -51,7 +46,7 @@ const InventoryManagement = () => {
           id: 'cp-1-2',
           name: '1/2" Copper Pipe',
           fields: [
-            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'soft', label: 'Soft' }, { value: 'hard', label: 'Hard' }], defaultValue: 'soft' },
+            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'soft', label: 'Soft' }, { value: 'hard', label: 'Hard' }] },
             { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 },
             { key: 'length', type: 'number', label: 'Length (ft)', placeholder: '0', min: 0, step: 0.1 }
           ]
@@ -60,7 +55,7 @@ const InventoryManagement = () => {
           id: 'cp-5-8',
           name: '5/8" Copper Pipe',
           fields: [
-            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'soft', label: 'Soft' }, { value: 'hard', label: 'Hard' }], defaultValue: 'soft' },
+            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'soft', label: 'Soft' }, { value: 'hard', label: 'Hard' }] },
             { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 },
             { key: 'length', type: 'number', label: 'Length (ft)', placeholder: '0', min: 0, step: 0.1 }
           ]
@@ -69,7 +64,7 @@ const InventoryManagement = () => {
           id: 'cp-3-4',
           name: '3/4" Copper Pipe',
           fields: [
-            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'soft', label: 'Soft' }, { value: 'hard', label: 'Hard' }], defaultValue: 'soft' },
+            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'soft', label: 'Soft' }, { value: 'hard', label: 'Hard' }] },
             { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 },
             { key: 'length', type: 'number', label: 'Length (ft)', placeholder: '0', min: 0, step: 0.1 }
           ]
@@ -78,7 +73,7 @@ const InventoryManagement = () => {
           id: 'cp-7-8',
           name: '7/8" Copper Pipe',
           fields: [
-            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'soft', label: 'Soft' }, { value: 'hard', label: 'Hard' }], defaultValue: 'soft' },
+            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'soft', label: 'Soft' }, { value: 'hard', label: 'Hard' }] },
             { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 },
             { key: 'length', type: 'number', label: 'Length (ft)', placeholder: '0', min: 0, step: 0.1 }
           ]
@@ -87,7 +82,7 @@ const InventoryManagement = () => {
           id: 'cp-1',
           name: '1" Copper Pipe',
           fields: [
-            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'soft', label: 'Soft' }, { value: 'hard', label: 'Hard' }], defaultValue: 'soft' },
+            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'soft', label: 'Soft' }, { value: 'hard', label: 'Hard' }] },
             { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 },
             { key: 'length', type: 'number', label: 'Length (ft)', placeholder: '0', min: 0, step: 0.1 }
           ]
@@ -96,7 +91,7 @@ const InventoryManagement = () => {
           id: 'cp-1-1-8',
           name: '1 1/8" Copper Pipe',
           fields: [
-            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'soft', label: 'Soft' }, { value: 'hard', label: 'Hard' }], defaultValue: 'soft' },
+            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'soft', label: 'Soft' }, { value: 'hard', label: 'Hard' }] },
             { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 },
             { key: 'length', type: 'number', label: 'Length (ft)', placeholder: '0', min: 0, step: 0.1 }
           ]
@@ -105,7 +100,7 @@ const InventoryManagement = () => {
           id: 'cp-1-3-8',
           name: '1 3/8" Copper Pipe',
           fields: [
-            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'soft', label: 'Soft' }, { value: 'hard', label: 'Hard' }], defaultValue: 'soft' },
+            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'soft', label: 'Soft' }, { value: 'hard', label: 'Hard' }] },
             { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 },
             { key: 'length', type: 'number', label: 'Length (ft)', placeholder: '0', min: 0, step: 0.1 }
           ]
@@ -114,7 +109,7 @@ const InventoryManagement = () => {
           id: 'cp-1-5-8',
           name: '1 5/8" Copper Pipe',
           fields: [
-            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'soft', label: 'Soft' }, { value: 'hard', label: 'Hard' }], defaultValue: 'soft' },
+            { key: 'type', type: 'toggle', label: 'Type', options: [{ value: 'soft', label: 'Soft' }, { value: 'hard', label: 'Hard' }] },
             { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 },
             { key: 'length', type: 'number', label: 'Length (ft)', placeholder: '0', min: 0, step: 0.1 }
           ]
@@ -132,13 +127,13 @@ const InventoryManagement = () => {
           name: '1/8" Insulation',
           fields: [
             { key: 'length', type: 'number', label: 'Length', placeholder: '0', min: 0, step: 0.1 },
-            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }], defaultValue: 'ft' },
+            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }] },
             { key: 'thickness', type: 'select', label: 'Thickness', options: [
               { value: '9mm', label: '9mm' },
               { value: '13mm', label: '13mm' },
               { value: '19mm', label: '19mm' },
               { value: '25mm', label: '25mm' }
-            ], defaultValue: '9mm' }
+            ] }
           ]
         },
         {
@@ -146,13 +141,13 @@ const InventoryManagement = () => {
           name: '1/4" Insulation',
           fields: [
             { key: 'length', type: 'number', label: 'Length', placeholder: '0', min: 0, step: 0.1 },
-            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }], defaultValue: 'ft' },
+            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }] },
             { key: 'thickness', type: 'select', label: 'Thickness', options: [
               { value: '9mm', label: '9mm' },
               { value: '13mm', label: '13mm' },
               { value: '19mm', label: '19mm' },
               { value: '25mm', label: '25mm' }
-            ], defaultValue: '9mm' }
+            ] }
           ]
         },
         {
@@ -160,13 +155,13 @@ const InventoryManagement = () => {
           name: '3/8" Insulation',
           fields: [
             { key: 'length', type: 'number', label: 'Length', placeholder: '0', min: 0, step: 0.1 },
-            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }], defaultValue: 'ft' },
+            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }] },
             { key: 'thickness', type: 'select', label: 'Thickness', options: [
               { value: '9mm', label: '9mm' },
               { value: '13mm', label: '13mm' },
               { value: '19mm', label: '19mm' },
               { value: '25mm', label: '25mm' }
-            ], defaultValue: '9mm' }
+            ] }
           ]
         },
         {
@@ -174,13 +169,13 @@ const InventoryManagement = () => {
           name: '1/2" Insulation',
           fields: [
             { key: 'length', type: 'number', label: 'Length', placeholder: '0', min: 0, step: 0.1 },
-            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }], defaultValue: 'ft' },
+            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }] },
             { key: 'thickness', type: 'select', label: 'Thickness', options: [
               { value: '9mm', label: '9mm' },
               { value: '13mm', label: '13mm' },
               { value: '19mm', label: '19mm' },
               { value: '25mm', label: '25mm' }
-            ], defaultValue: '9mm' }
+            ] }
           ]
         },
         {
@@ -188,13 +183,13 @@ const InventoryManagement = () => {
           name: '5/8" Insulation',
           fields: [
             { key: 'length', type: 'number', label: 'Length', placeholder: '0', min: 0, step: 0.1 },
-            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }], defaultValue: 'ft' },
+            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }] },
             { key: 'thickness', type: 'select', label: 'Thickness', options: [
               { value: '9mm', label: '9mm' },
               { value: '13mm', label: '13mm' },
               { value: '19mm', label: '19mm' },
               { value: '25mm', label: '25mm' }
-            ], defaultValue: '9mm' }
+            ] }
           ]
         },
         {
@@ -202,13 +197,13 @@ const InventoryManagement = () => {
           name: '3/4" Insulation',
           fields: [
             { key: 'length', type: 'number', label: 'Length', placeholder: '0', min: 0, step: 0.1 },
-            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }], defaultValue: 'ft' },
+            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }] },
             { key: 'thickness', type: 'select', label: 'Thickness', options: [
               { value: '9mm', label: '9mm' },
               { value: '13mm', label: '13mm' },
               { value: '19mm', label: '19mm' },
               { value: '25mm', label: '25mm' }
-            ], defaultValue: '9mm' }
+            ] }
           ]
         },
         {
@@ -216,13 +211,13 @@ const InventoryManagement = () => {
           name: '7/8" Insulation',
           fields: [
             { key: 'length', type: 'number', label: 'Length', placeholder: '0', min: 0, step: 0.1 },
-            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }], defaultValue: 'ft' },
+            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }] },
             { key: 'thickness', type: 'select', label: 'Thickness', options: [
               { value: '9mm', label: '9mm' },
               { value: '13mm', label: '13mm' },
               { value: '19mm', label: '19mm' },
               { value: '25mm', label: '25mm' }
-            ], defaultValue: '9mm' }
+            ] }
           ]
         },
         {
@@ -230,13 +225,13 @@ const InventoryManagement = () => {
           name: '1" Insulation',
           fields: [
             { key: 'length', type: 'number', label: 'Length', placeholder: '0', min: 0, step: 0.1 },
-            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }], defaultValue: 'ft' },
+            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }] },
             { key: 'thickness', type: 'select', label: 'Thickness', options: [
               { value: '9mm', label: '9mm' },
               { value: '13mm', label: '13mm' },
               { value: '19mm', label: '19mm' },
               { value: '25mm', label: '25mm' }
-            ], defaultValue: '9mm' }
+            ] }
           ]
         },
         {
@@ -244,13 +239,13 @@ const InventoryManagement = () => {
           name: '1 1/8" Insulation',
           fields: [
             { key: 'length', type: 'number', label: 'Length', placeholder: '0', min: 0, step: 0.1 },
-            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }], defaultValue: 'ft' },
+            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }] },
             { key: 'thickness', type: 'select', label: 'Thickness', options: [
               { value: '9mm', label: '9mm' },
               { value: '13mm', label: '13mm' },
               { value: '19mm', label: '19mm' },
               { value: '25mm', label: '25mm' }
-            ], defaultValue: '9mm' }
+            ] }
           ]
         },
         {
@@ -258,13 +253,13 @@ const InventoryManagement = () => {
           name: '1 3/8" Insulation',
           fields: [
             { key: 'length', type: 'number', label: 'Length', placeholder: '0', min: 0, step: 0.1 },
-            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }], defaultValue: 'ft' },
+            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }] },
             { key: 'thickness', type: 'select', label: 'Thickness', options: [
               { value: '9mm', label: '9mm' },
               { value: '13mm', label: '13mm' },
               { value: '19mm', label: '19mm' },
               { value: '25mm', label: '25mm' }
-            ], defaultValue: '9mm' }
+            ] }
           ]
         },
         {
@@ -272,13 +267,13 @@ const InventoryManagement = () => {
           name: '1 5/8" Insulation',
           fields: [
             { key: 'length', type: 'number', label: 'Length', placeholder: '0', min: 0, step: 0.1 },
-            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }], defaultValue: 'ft' },
+            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }] },
             { key: 'thickness', type: 'select', label: 'Thickness', options: [
               { value: '9mm', label: '9mm' },
               { value: '13mm', label: '13mm' },
               { value: '19mm', label: '19mm' },
               { value: '25mm', label: '25mm' }
-            ], defaultValue: '9mm' }
+            ] }
           ]
         },
         {
@@ -286,13 +281,13 @@ const InventoryManagement = () => {
           name: '2" Insulation',
           fields: [
             { key: 'length', type: 'number', label: 'Length', placeholder: '0', min: 0, step: 0.1 },
-            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }], defaultValue: 'ft' },
+            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }] },
             { key: 'thickness', type: 'select', label: 'Thickness', options: [
               { value: '9mm', label: '9mm' },
               { value: '13mm', label: '13mm' },
               { value: '19mm', label: '19mm' },
               { value: '25mm', label: '25mm' }
-            ], defaultValue: '9mm' }
+            ] }
           ]
         }
       ]
@@ -476,7 +471,7 @@ const InventoryManagement = () => {
                 { value: '2', label: '2 Core' },
                 { value: '4', label: '4 Core' },
                 { value: '6', label: '6 Core' }
-              ], defaultValue: '2' }
+              ] }
             ]
           },
           {
@@ -488,7 +483,7 @@ const InventoryManagement = () => {
                 { value: '2', label: '2 Core' },
                 { value: '4', label: '4 Core' },
                 { value: '6', label: '6 Core' }
-              ], defaultValue: '2' }
+              ] }
             ]
           },
           {
@@ -500,7 +495,7 @@ const InventoryManagement = () => {
                 { value: '2', label: '2 Core' },
                 { value: '4', label: '4 Core' },
                 { value: '6', label: '6 Core' }
-              ], defaultValue: '2' }
+              ] }
             ]
           },
           {
@@ -512,7 +507,7 @@ const InventoryManagement = () => {
                 { value: '2', label: '2 Core' },
                 { value: '4', label: '4 Core' },
                 { value: '6', label: '6 Core' }
-              ], defaultValue: '2' }
+              ] }
             ]
           },
           {
@@ -524,7 +519,7 @@ const InventoryManagement = () => {
                 { value: '2', label: '2 Core' },
                 { value: '4', label: '4 Core' },
                 { value: '6', label: '6 Core' }
-              ], defaultValue: '2' }
+              ] }
             ]
           },
           {
@@ -536,7 +531,7 @@ const InventoryManagement = () => {
                 { value: '2', label: '2 Core' },
                 { value: '4', label: '4 Core' },
                 { value: '6', label: '6 Core' }
-              ], defaultValue: '2' }
+              ] }
             ]
           },
           {
@@ -548,7 +543,7 @@ const InventoryManagement = () => {
                 { value: '2', label: '2 Core' },
                 { value: '4', label: '4 Core' },
                 { value: '6', label: '6 Core' }
-              ], defaultValue: '2' }
+              ] }
             ]
           }
         ]
@@ -569,7 +564,7 @@ const InventoryManagement = () => {
               { value: 'good', label: 'Good' },
               { value: 'fair', label: 'Fair' },
               { value: 'needs-repair', label: 'Needs Repair' }
-            ], defaultValue: 'good' }
+            ] }
           ]
         },
         {
@@ -589,7 +584,7 @@ const InventoryManagement = () => {
               { value: 'cordless', label: 'Cordless' },
               { value: 'corded', label: 'Corded' },
               { value: 'hammer', label: 'Hammer Drill' }
-            ], defaultValue: 'cordless' }
+            ] }
           ]
         },
         {
@@ -601,7 +596,7 @@ const InventoryManagement = () => {
               { value: 'small', label: '1/8" - 5/8"' },
               { value: 'medium', label: '1/4" - 1 1/8"' },
               { value: 'large', label: '5/8" - 2 1/8"' }
-            ], defaultValue: 'medium' }
+            ] }
           ]
         },
         {
@@ -640,7 +635,7 @@ const InventoryManagement = () => {
           name: 'Tarfelt',
           fields: [
             { key: 'length', type: 'number', label: 'Length', placeholder: '0', min: 0, step: 0.1 },
-            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'meter', label: 'Meter' }, { value: 'roll', label: 'Roll' }], defaultValue: 'meter' },
+            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'meter', label: 'Meter' }, { value: 'roll', label: 'Roll' }] },
             { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
           ]
         },
@@ -656,7 +651,7 @@ const InventoryManagement = () => {
           name: 'Hatlon',
           fields: [
             { key: 'length', type: 'number', label: 'Length', placeholder: '0', min: 0, step: 0.1 },
-            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }], defaultValue: 'ft' }
+            { key: 'unit', type: 'toggle', label: 'Unit', options: [{ value: 'ft', label: 'Feet' }, { value: 'meter', label: 'Meter' }] }
           ]
         },
         {
@@ -667,7 +662,7 @@ const InventoryManagement = () => {
               { value: '8mm', label: '8mm' },
               { value: '10mm', label: '10mm' },
               { value: '12mm', label: '12mm' }
-            ], defaultValue: '10mm' },
+            ] },
             { key: 'length', type: 'number', label: 'Length (m)', placeholder: '0', min: 0, step: 0.1 },
             { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
           ]
@@ -680,13 +675,13 @@ const InventoryManagement = () => {
               { value: '8mm', label: '8mm' },
               { value: '10mm', label: '10mm' },
               { value: '12mm', label: '12mm' }
-            ], defaultValue: '10mm' },
+            ] },
             { key: 'length', type: 'radio', label: 'Length', options: [
               { value: '3', label: '3 inch' },
               { value: '4', label: '4 inch' },
               { value: '5', label: '5 inch' },
               { value: '6', label: '6 inch' }
-            ], defaultValue: '4' },
+            ] },
             { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
           ]
         },
@@ -698,13 +693,13 @@ const InventoryManagement = () => {
               { value: '8mm', label: '8mm' },
               { value: '10mm', label: '10mm' },
               { value: '12mm', label: '12mm' }
-            ], defaultValue: '10mm' },
+            ] },
             { key: 'length', type: 'select', label: 'Length', options: [
               { value: '3', label: '3 inch' },
               { value: '4', label: '4 inch' },
               { value: '5', label: '5 inch' },
               { value: '6', label: '6 inch' }
-            ], defaultValue: '4' },
+            ] },
             { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
           ]
         },
@@ -725,7 +720,7 @@ const InventoryManagement = () => {
               { value: 'white', label: 'White' },
               { value: 'clear', label: 'Clear' },
               { value: 'gray', label: 'Gray' }
-            ], defaultValue: 'clear' },
+            ] },
             { key: 'gun_required', type: 'checkbox', label: 'Gun Required' }
           ]
         },
@@ -737,7 +732,7 @@ const InventoryManagement = () => {
               { value: '8mm', label: '8mm' },
               { value: '10mm', label: '10mm' },
               { value: '12mm', label: '12mm' }
-            ], defaultValue: '10mm' },
+            ] },
             { key: 'length', type: 'checkboxes', label: 'Length', options: [
               { value: '3', label: '3 inch' },
               { value: '4', label: '4 inch' },
@@ -755,7 +750,7 @@ const InventoryManagement = () => {
               { value: 'small', label: 'Small' },
               { value: 'medium', label: 'Medium' },
               { value: 'large', label: 'Large' }
-            ], defaultValue: 'medium' },
+            ] },
             { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
           ]
         },
@@ -795,7 +790,7 @@ const InventoryManagement = () => {
             { key: 'size', type: 'toggle', label: 'Size', options: [
               { value: '2ft', label: '2ft' },
               { value: '4ft', label: '4ft' }
-            ], defaultValue: '4ft' },
+            ] },
             { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
           ]
         },
@@ -829,7 +824,7 @@ const InventoryManagement = () => {
               { value: 'small', label: 'Small' },
               { value: 'medium', label: 'Medium' },
               { value: 'large', label: 'Large' }
-            ], defaultValue: 'medium' },
+            ] },
             { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 }
           ]
         },
@@ -850,7 +845,7 @@ const InventoryManagement = () => {
               { value: '99.9', label: '99.9%' },
               { value: '99.99', label: '99.99%' },
               { value: '99.999', label: '99.999%' }
-            ], defaultValue: '99.9' }
+            ] }
           ]
         },
         {
@@ -862,7 +857,7 @@ const InventoryManagement = () => {
               { value: 'water-soluble', label: 'Water Soluble' },
               { value: 'petrolatum', label: 'Petrolatum Base' },
               { value: 'paste', label: 'Paste Form' }
-            ], defaultValue: 'paste' }
+            ] }
           ]
         },
         {
@@ -875,7 +870,7 @@ const InventoryManagement = () => {
               { value: '220', label: '220 Grit' },
               { value: '320', label: '320 Grit' },
               { value: '400', label: '400 Grit' }
-            ], defaultValue: '220' }
+            ] }
           ]
         }
       ]
@@ -893,14 +888,14 @@ const InventoryManagement = () => {
             { key: 'type', type: 'toggle', label: 'Type', options: [
               { value: 'NO', label: 'Normally Open' },
               { value: 'NC', label: 'Normally Closed' }
-            ], defaultValue: 'NO' },
+            ] },
             { key: 'quantity', type: 'number', label: 'Quantity', placeholder: '0', min: 0 },
             { key: 'amperage', type: 'select', label: 'Amperage', options: [
               { value: '10A', label: '10A' },
               { value: '16A', label: '16A' },
               { value: '25A', label: '25A' },
               { value: '32A', label: '32A' }
-            ], defaultValue: '16A' }
+            ] }
           ]
         },
         {
@@ -912,7 +907,7 @@ const InventoryManagement = () => {
               { value: '120V', label: '120V' },
               { value: '240V', label: '240V' },
               { value: '480V', label: '480V' }
-            ], defaultValue: '240V' }
+            ] }
           ]
         },
         {
@@ -924,7 +919,7 @@ const InventoryManagement = () => {
               { value: 'small', label: 'Small (1/4")' },
               { value: 'medium', label: 'Medium (3/8")' },
               { value: 'large', label: 'Large (1/2")' }
-            ], defaultValue: 'medium' }
+            ] }
           ]
         },
         {
@@ -936,7 +931,7 @@ const InventoryManagement = () => {
               { value: 'ring', label: 'Ring Terminal' },
               { value: 'spade', label: 'Spade Terminal' },
               { value: 'butt', label: 'Butt Connector' }
-            ], defaultValue: 'ring' }
+            ] }
           ]
         },
         {
@@ -948,7 +943,7 @@ const InventoryManagement = () => {
               { value: '1/2', label: '1/2"' },
               { value: '3/4', label: '3/4"' },
               { value: '1', label: '1"' }
-            ], defaultValue: '1/2' }
+            ] }
           ]
         },
         {
@@ -1011,6 +1006,13 @@ const InventoryManagement = () => {
       ]
     }
   ];
+
+  const { inventoryData, loading: inventoryLoading, error, updateInventoryData } = useInventory(inventoryCategories);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [sortBy, setSortBy] = useState('name-asc');
+  const [showAllItems, setShowAllItems] = useState(true); // Show all items by default for order making
+  const [generatedReport, setGeneratedReport] = useState(null);
 
   // Initialize all categories as expanded for order making view
   useEffect(() => {
@@ -1084,9 +1086,10 @@ const InventoryManagement = () => {
     URL.revokeObjectURL(url);
   };
 
-  const handleSyncData = () => {
-    // Mock sync functionality
-    console.log('Syncing order data...');
+  const handleResetData = () => {
+    if (window.confirm('Are you sure you want to reset all item quantities?')) {
+      updateInventoryData({});
+    }
   };
 
   const handleClearFilters = () => {
@@ -1108,14 +1111,14 @@ const InventoryManagement = () => {
     inventoryCategories?.forEach(category => {
       const categoryEmoji = getCategoryEmoji(category?.id);
       category?.items?.forEach(item => {
-        const itemData = inventoryData?.[item?.id] || {};
-        const quantity = itemData?.quantity || 0;
-        const length = itemData?.length || 0;
-        const elbowQuantity = itemData?.elbowQuantity || 0;
-        const couplingQuantity = itemData?.couplingQuantity || 0;
-        const required = itemData?.required || false;
+        const itemData = inventoryData?.[item.id] || {};
+        const hasValue = Object.values(itemData).some(v => {
+          if (typeof v === 'number') return v > 0;
+          if (typeof v === 'boolean') return v;
+          return !!v;
+        });
 
-        if (quantity > 0 || length > 0 || elbowQuantity > 0 || couplingQuantity > 0 || required) {
+        if (hasValue) {
           allItems?.push({
             category: `${categoryEmoji} ${category?.title}`,
             name: item?.name,
@@ -1233,7 +1236,7 @@ const InventoryManagement = () => {
                   onAddItem={handleAddItem}
                   onGenerateReport={handleGenerateReport}
                   onExportData={handleExportData}
-                  onSyncData={handleSyncData}
+                  onResetData={handleResetData}
                 />
                 <Button
                   onClick={generateOrderReport}

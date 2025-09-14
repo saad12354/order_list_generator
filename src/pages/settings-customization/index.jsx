@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import HeaderBrand from '../../components/ui/HeaderBrand';
 import BottomTabNavigation from '../../components/ui/BottomTabNavigation';
-import DataManagementPanel from './components/DataManagementPanel';
 import CustomizationPanel from './components/CustomizationPanel';
 import CustomCategoriesPanel from './components/CustomCategoriesPanel';
 import UserPreferencesPanel from './components/UserPreferencesPanel';
@@ -10,7 +9,6 @@ import Icon from '../../components/AppIcon';
 
 const SettingsCustomization = () => {
   const [expandedPanels, setExpandedPanels] = useState({
-    dataManagement: false,
     customization: false,
     customCategories: false,
     userPreferences: false,
@@ -69,7 +67,6 @@ const SettingsCustomization = () => {
       
       // Reset panel states
       setExpandedPanels({
-        dataManagement: false,
         customization: false,
         customCategories: false,
         userPreferences: false,
@@ -170,11 +167,6 @@ const SettingsCustomization = () => {
 
             {/* Settings Panels */}
             <div className="space-y-4">
-              <DataManagementPanel
-                isExpanded={expandedPanels?.dataManagement}
-                onToggle={() => togglePanel('dataManagement')}
-              />
-              
               <CustomizationPanel
                 isExpanded={expandedPanels?.customization}
                 onToggle={() => togglePanel('customization')}
